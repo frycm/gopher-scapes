@@ -44,8 +44,8 @@ func TestFieldOfView0Values(t *testing.T) {
 func TestFieldOfViewFF50mm(t *testing.T) {
 	fov := lens.FieldOfView(lens.PlaneSize35mm, 50)
 
-	horizontalAngle := 2 * math.Atan(float64(36) / (2 * 50)) * (180 / math.Pi)
-	verticalAngle := 2 * math.Atan(float64(24) / (2 * 50)) * (180 / math.Pi)
+	horizontalAngle := 2 * math.Atan(float64(36)/(2*50)) * (180 / math.Pi)
+	verticalAngle := 2 * math.Atan(float64(24)/(2*50)) * (180 / math.Pi)
 
 	if fov.Horizontal != horizontalAngle {
 		t.Errorf("%2f horizontal angle was expected on full frame withm 50mm lens, but %2f was calculated", horizontalAngle, fov.Horizontal)

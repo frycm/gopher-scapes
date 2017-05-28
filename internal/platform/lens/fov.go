@@ -16,5 +16,5 @@ func FieldOfView(plane PlaneSize, focalLength float64) FieldOfViewAngle {
 }
 
 func fovAngle(sensorSideSize float64, focalLength float64) float64 {
-	return 2 * math.Atan(sensorSideSize / (2 * focalLength)) * (180 / math.Pi)
+	return 2 * math.Atan(sensorSideSize/(2*focalLength)) * (180 / math.Pi)
 }
