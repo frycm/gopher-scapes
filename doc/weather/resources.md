@@ -1,0 +1,1 @@
+http://api.met.no/weatherapi/locationforecast/1.9/documentation

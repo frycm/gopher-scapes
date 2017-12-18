@@ -1,19 +1,23 @@
 package hgt_test
 
 import (
+	"os"
 	"testing"
 
 	"github.com/frycm/gopher-scapes/internal/platform/hgt"
 )
 
+const TestFileName = "../../../test_data/raw_hgt/N50E015.hgt"
+
 // Try to load N50E15 tile and check if max height is as expected
 // Max height should be Snezka mountain (1603 m, 1600 in SRTMGL1)
 func TestLoadTileFromFile(t *testing.T) {
 	var tile hgt.Tile
-	err := hgt.LoadTileFromFile("../../../test_data/raw_hgt/N50E015.hgt", &tile)
+	source, err := os.Open(TestFileName)
 	if err != nil {
-		t.Fatalf("Could not load source file: %s", err)
+		t.Fatalf("Could open source file source file: %s", err)
 	}
+	err = hgt.Load(&tile, source)
 
 	if len(tile.RawRow) != hgt.TileRawRowSize {
 		t.Errorf("%d height point was expected in tile, but %d found", hgt.TileRawRowSize, len(tile.RawRow))

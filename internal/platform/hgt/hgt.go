@@ -1,5 +1,11 @@
 package hgt
 
+import (
+	"encoding/binary"
+	"github.com/pkg/errors"
+	"io"
+)
+
 const (
 	// Tile edge size
 	EdgeSize = 3601
@@ -21,4 +27,14 @@ func (tile *Tile) Point(row uint, col uint) int16 {
 		return MissingData
 	}
 	return tile.RawRow[row*EdgeSize+col]
+}
+
+// Load raw hgt data into given source
+func Load(targetTile *Tile, source io.Reader) error {
+	err := binary.Read(source, binary.BigEndian, targetTile.RawRow[:])
+	if err != nil {
+		return errors.Wrapf(err, "could not read tile data from source")
+	}
+
+	return nil
 }
